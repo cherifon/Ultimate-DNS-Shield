@@ -189,7 +189,7 @@ Add these in Pi-hole under **Adlists > Update Gravity**:
 |------|-------------|
 | [Steven Black](https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts) | Gold standard, ~200k entries |
 | [Hagezi Pro](https://raw.githubusercontent.com/hagezi/dns-blocklists/main/hosts/pro.txt) | Aggressive, low false positives |
-| [OISD Big](https://big.oisd.nl/domains) | Large, tuned for smart home devices |
+| [OISD Big](https://big.oisd.nl) | Large, tuned for smart home devices |
 
 ---
 
