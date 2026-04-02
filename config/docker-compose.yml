@@ -1,0 +1,51 @@
+# =============================================================================
+#  Ultimate DNS Shield — docker-compose.yml
+#  Ready-to-use configuration for Pi-hole + Unbound
+#
+#  BEFORE RUNNING:
+#    1. Replace YOUR_TIMEZONE with your timezone (e.g. Europe/London)
+#    2. Replace YOUR_STRONG_PASSWORD with a secure password
+#    3. Run: docker compose up -d
+#
+#  Copyright © 2026 Cherif Jebali — Unauthorized redistribution is prohibited.
+# =============================================================================
+
+services:
+
+  unbound:
+    container_name: unbound
+    image: mvance/unbound-rpi:latest
+    volumes:
+      - ./etc-unbound/unbound.conf:/opt/unbound/etc/unbound/unbound.conf:ro
+    networks:
+      pihole_net:
+        ipv4_address: 172.20.0.2
+    restart: unless-stopped
+
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    depends_on:
+      - unbound
+    networks:
+      pihole_net:
+        ipv4_address: 172.20.0.3
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    environment:
+      - TZ=YOUR_TIMEZONE
+      - FTLCONF_webserver_api_password=YOUR_STRONG_PASSWORD
+      - FTLCONF_dns_listeningMode=all
+    volumes:
+      - ./etc-pihole:/etc/pihole
+    restart: unless-stopped
+
+networks:
+  pihole_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
