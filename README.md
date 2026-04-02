@@ -57,7 +57,7 @@ Unbound is never exposed to the LAN — only Pi-hole can reach it on the interna
 ### 1. Clone this repo on your Pi
 
 ```bash
-git clone https://github.com/cherifjebali/ultimate-dns-shield.git
+git clone https://github.com/cherifon/Ultimate-DNS-Shield.git
 cd ultimate-dns-shield
 ```
 
